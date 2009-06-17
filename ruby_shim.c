@@ -27,9 +27,17 @@
 #include <string.h>
 #include <errno.h>
 
+#define ENV "FOOISHNESS"
+#define ENV_VALUE "yummy"
 #define REAL_RUBY "/usr/bin/ruby"
 
 int main(int argc, char **argv) {
+
+  if(setenv(ENV, ENV_VALUE, 1) < 0) {
+    printf("Error: Failed to set the environment %s=%s: %s.\n", ENV, ENV_VALUE, strerror(errno));
+    exit(EXIT_FAILURE);
+  }
+
   if(execv(REAL_RUBY, argv) < 0) {
     printf("Error: Failed to execv() the real ruby interpreter: %s.\n", strerror(errno));
     exit(EXIT_FAILURE);
