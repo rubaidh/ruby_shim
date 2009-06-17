@@ -1,3 +1,5 @@
+CC=gcc
+
 default: all
 
 all: ruby_shim
