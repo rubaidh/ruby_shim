@@ -1,0 +1,22 @@
+= Ruby Shim
+
+This is a quick-hack shim for running Ruby Enterprise Edition on Solaris
+(specifically Joyent's pkgsrc setup) which has OpenSSL installed in /opt/local.
+The trouble is that Ruby comes across Sun's own SSL library in the lib path
+first and uses that instead.  Which means that it gets undefined symbols.
+
+A few people have suggested a shell script shim which sets LD_LIBRARY_PATH and
+then execs ruby. Unfortunately, this shim doesn't work for commands that use the
+she-bang method of invoking ruby. Such commands include irb. So we wind up with
+the shim only working for Passenger (for example) and the rest of the Ruby
+environment being second class citizens, or we wind up not being able to use any
+she-bang-invoked commands. Both of these options suck.
+
+It's my theory, which I'm about to test, that we should be able to incorporate
+this shim into a C executable and it should do the right thing in all places. We
+shall see what happens. :-)
+
+== Customisation
+
+You'll want to tweak a few things to make it work. Hopefully they'll all be in
+#defines up near the top of the main file. :-)
