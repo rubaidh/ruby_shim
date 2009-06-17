@@ -27,9 +27,9 @@
 #include <string.h>
 #include <errno.h>
 
-#define ENV "FOOISHNESS"
-#define ENV_VALUE "yummy"
-#define REAL_RUBY "/usr/bin/ruby"
+#define ENV "LD_LIBRARY_PATH"
+#define ENV_VALUE "/opt/local/lib"
+#define REAL_RUBY "/opt/ruby-enterprise/bin/ruby.real"
 
 int main(int argc, char **argv) {
 
