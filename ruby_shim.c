@@ -23,8 +23,18 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <errno.h>
+
+#define REAL_RUBY "/usr/bin/ruby"
 
 int main(int argc, char **argv) {
-	printf("Hello World!\n");
-	return(EXIT_SUCCESS);
+  if(execv(REAL_RUBY, argv) < 0) {
+    printf("Error: Failed to execv() the real ruby interpreter: %s.\n", strerror(errno));
+    exit(EXIT_FAILURE);
+  }
+
+  /* Never reached! */
+  return(0);
 }
